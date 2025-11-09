@@ -143,6 +143,12 @@ export default class Replay {
                              await replayBoard.swapCandies(candy1, candy2);
                         }
                     }
+                } else if (action.type === 'activateRainbow') {
+                    const rainbowCandy = replayBoard.grid[action.rainbowCandy.r][action.rainbowCandy.c];
+                    const otherCandy = replayBoard.grid[action.otherCandy.r][action.otherCandy.c];
+                    if (rainbowCandy && otherCandy) {
+                        await replayBoard.activateRainbowPowerup(rainbowCandy, otherCandy);
+                    }
                 } else if (action.type === 'smash') {
                     const candiesToSmash = action.smashed
                         .map(coords => (replayBoard.grid[coords.r] ? replayBoard.grid[coords.r][coords.c] : null))
